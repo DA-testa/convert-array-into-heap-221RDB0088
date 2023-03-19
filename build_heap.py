@@ -18,7 +18,7 @@ def into_heap(mas):
         op(i, n, mas, swaps)
     return swaps
 
-n = int(input())
+n = (input())
 mas = list(map(int, input().split()))
 swaps = into_heap(mas)
 

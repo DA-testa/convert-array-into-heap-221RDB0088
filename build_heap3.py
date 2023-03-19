@@ -25,3 +25,4 @@ swaps = into_heap(mas)
 print(len(swaps))
 for swap in swaps:
     print(swap[0], swap[1])
+    #

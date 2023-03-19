@@ -1,33 +1,27 @@
-# python3
+def op(i, n, mas, swaps):
+    min_indek = i
+    l = 2*i + 1
+    if l < n and mas[l] < mas[min_indek]:
+        min_indek = l
+    r = 2*i + 2
+    if r < n and mas[r] < mas[min_indek]:
+        min_indek = r
+    if i != min_indek:
+        swaps.append((i, min_indek))
+        mas[i], mas[min_indek] = mas[min_indek], mas[i]
+        op(min_indek, n, mas, swaps)
 
-
-def build_heap(data):
+def into_heap(mas):
+    n = len(mas)
     swaps = []
-    # TODO: Creat heap and heap sort
-    # try to achieve  O(n) and not O(n2)
-
-
+    for i in range(n//2, -1, -1):
+        op(i, n, mas, swaps)
     return swaps
 
-    n = int(input())
-    data = list(map(int, input().split()))
+n = int(input())
+mas = list(map(int, input().split()))
+swaps = into_heap(mas)
 
-    # checks if lenght of data is the same as the said lenght
-    assert len(data) == n
-
-    # calls function to assess the data 
-    # and give back all swaps
-    swaps = build_heap(data)
-
-    # TODO: output how many swaps were made, 
-    # this number should be less than 4n (less than 4*len(data))
-
-
-    # output all swaps
-    print(len(swaps))
-    for i, j in swaps:
-        print(i, j)
-
-
-if __name__ == "__main__":
-    main()
+print(len(swaps))
+for swap in swaps:
+    print(swap[0], swap[1])

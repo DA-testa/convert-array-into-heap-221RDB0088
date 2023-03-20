@@ -43,6 +43,7 @@ def main():
 
         if "a" not in fails:
             path = './tests/' + fails
+
             with open(path, 'r') as testfile:
                 n = int(testfile.readline().strip())
                 n1 = testfile.readline().strip()
@@ -78,6 +79,6 @@ def main():
         return
 
 
-
+# ???
 if __name__ == "__main__":
     main()

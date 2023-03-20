@@ -1,42 +1,84 @@
-# python3
-
-
 def build_heap(data):
     swaps = []
+
+    n = len(data)
     # TODO: Creat heap and heap sort
-    # try to achieve  O(n) and not O(n2)
 
-
+    for i in range(n // 2, -1, -1):
+        heap_sort(data, i, swaps)
     return swaps
 
 
-def main():
+def heap_sort(data, i, swaps):
+    
+    n = len(data)
+
+    parent = i
+    kreis =2*i+1
+
+    if kreis <= (n-1) and data[kreis] < data[parent]:
+        parent = kreis
+
+    labais =2*i+2  
+    if labais <= (n-1) and data[labais] < data[parent]:
+
+        parent = labais
+    if i != parent:
+        data[i], data[parent] = data[parent], data[i]
+        swaps.append((i, parent))
+        heap_sort(data, parent, swaps)
+
+
+
+
+def main():   
     
     # TODO : add input and corresponding checks
-    # add another input for I or F 
-    # first two tests are from keyboard, third test is from a file
+    print("F vai I")
+    inp = input()
+    
+    #ja F
+    if "F" in inp :
+        fails =input()
+
+        if "a" not in fails:
+            path = './tests/' + fails
+
+            with open(path, 'r') as testfile:
+                n = int(testfile.readline().strip())
+                n1 = testfile.readline().strip()
+            data = list(map(int, n1.split()))
+            assert len(data) == n
+
+            swaps = build_heap(data)
+
+         # TODO: output how many swap
 
 
-    # input from keyboard
-    n = int(input())
-    data = list(map(int, input().split()))
+            print(len(swaps))
+            for i, j in swaps:
+                print(i, j)
 
-    # checks if lenght of data is the same as the said lenght
-    assert len(data) == n
+   
+    # ja I
+    elif "I" in inp :
+        n = int(input())
+        data = list(map(int, input().split()))
+        assert len(data) == n
 
-    # calls function to assess the data 
-    # and give back all swaps
-    swaps = build_heap(data)
+        #call for access
+        swaps = build_heap(data)
 
-    # TODO: output how many swaps were made, 
-    # this number should be less than 4n (less than 4*len(data))
+         # TODO: output how many swaps were made
+
+        print(len(swaps))
+        for i, j in swaps:
+            print(i, j)
+    else:
+        print("error")
+        return
 
 
-    # output all swaps
-    print(len(swaps))
-    for i, j in swaps:
-        print(i, j)
-
-
+# ???
 if __name__ == "__main__":
     main()
